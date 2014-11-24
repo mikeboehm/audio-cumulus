@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SoundFlask</title>
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" title="Styles" type="text/css" media="screen" charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<h1>Play some phat beats</h1>
+		<form action="/play" role="form" method="post">
+			<div class="form-group">
+				<label for="url">Url:</label>
+				<input class="form-control" type="text" name="url" />
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		<p><a href="/radio6">Listen to Radio 6</a></p>
+	</div>
+</body>
+</html>

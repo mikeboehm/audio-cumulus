@@ -1,0 +1,13 @@
+# Virtualenv
+.Python
+bin
+lib
+include
+
+# OSX
+.DS_store
+
+# Application files
+connection.py
+list.txt
+*.pyc
