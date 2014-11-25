@@ -22,11 +22,19 @@ def play():
 		url = request.form['url']
 		track = client.get('/resolve', url=url)
 		stream_url = client.get(track.stream_url, allow_redirects=False)
-
 		player = vlc.MediaPlayer(stream_url.location)
 		player.play();
 
 	return redirect(url_for('hello'))
+
+@app.route('/play_stream', methods=['POST'])
+def play_stream():
+	if request.method == 'POST':
+		url = request.json['url']
+		stream_url = client.get(url, allow_redirects=False)
+		player = vlc.MediaPlayer(stream_url.location)
+		player.play();
+	return jsonify({'are you ready to rock?' : 'fuck yeah!'})
 
 @app.route("/get_tracks")
 def get_tracks():
