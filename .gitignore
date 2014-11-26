@@ -11,3 +11,4 @@ include
 connection.py
 list.txt
 *.pyc
+connection.py

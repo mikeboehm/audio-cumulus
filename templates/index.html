@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="scloud">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SoundFlask</title>
-	<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" title="Styles" type="text/css" media="screen" charset="utf-8">
-</head>
-<body>
-	<div class="container">
+{% extends "layout.html" %}
+{% block content %}
+	<div class="page-header">
 		<h1>Play some phat beats</h1>
-		<form action="/play" role="form" method="post">
-			<div class="form-group">
-				<label for="url">Url:</label>
-				<input class="form-control" type="text" name="url" />
-			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
-		</form>
-		<p><a href="/radio6">Listen to Radio 6</a></p>
-		<div class="stream" ng-controller="StreamController as stream">
-			{% raw %}
-			Order by: <a href="" ng-click="stream.updatePagination('title')">Name</a> -
-			<a href="" ng-click="stream.updatePagination('duration')">Duration</a> -
-			<a href="" ng-click="stream.updatePagination('user')">User</a> -
-			<a href="" ng-click="stream.updatePagination('date')">Date</a>
-			<ul class="list-group">
-				<li ng-repeat="track in stream.tracks | orderBy:stream.pagination"  class="list-group-item">
-					{{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span class="badge" ng-click="stream.play(track.stream_url)"> > </span>
-				</li>
-			</ul>
-			{% endraw %}
-		</div>
 	</div>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
-</body>
-</html>
+	<form action="/play" role="form" method="post">
+		<div class="form-group">
+			<label for="url">Url:</label>
+			<input class="form-control" type="text" name="url" />
+		</div>
+		<button type="submit">Submit</button>
+	</form>
+	<a href="/radio6" class="btn btn-default">Listen to Radio 6</a>
+{% endblock %}

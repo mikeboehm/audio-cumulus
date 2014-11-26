@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="scloud">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SoundFlask</title>
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" title="Styles" type="text/css" media="screen" charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li role="presentation"{% if home %} class="active"{% endif %}><a href="/">Home</a></li>
+			<li role="presentation"{% if stream %} class="active"{% endif %}><a href="/stream">Stream</a></li>
+			<li role="presentation"{% if favourites %} class="active"{% endif %}><a href="/favourites">Favourites</a></li>
+			<li role="presentation"{% if otherfavourites %} class="active"{% endif %}><a href="/others_favourites">Other's Favourites</a></li>
+		</ul>
+		{% block content %}
+		{% endblock %}
+
+	</div>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
