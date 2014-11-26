@@ -52,10 +52,24 @@ def get_tracks():
 		for user in user_tracks:
 			for track in user:
 				if hasattr(track, 'stream_url'):
-					tracks.append(dict(id=track.id, duration=track.duration, title=track.title, stream_url=track.stream_url,user=track.user['username']))
+					tracks.append(dict(
+						id=track.id,
+						duration=track.duration,
+						title=track.title,
+						stream_url=track.stream_url,
+						user=track.user['username'],
+						date=track.created_at,
+
+					))
 		with open('list.txt', 'w') as outfile:
 			json.dump({'tracks' : tracks}, outfile)
 		return jsonify({ 'tracks' : tracks })
+
+@app.route('/embedcode/', methods=['GET'])
+def embedcode():
+	track = request.args.get('track')
+	embed = client.get('/oembed', url=track)
+	return embed.html.encode('utf8')
 
 @app.route('/radio6')
 def radio6():

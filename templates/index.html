@@ -23,11 +23,12 @@
 			{% raw %}
 			Order by: <a href="" ng-click="stream.updatePagination('title')">Name</a> -
 			<a href="" ng-click="stream.updatePagination('duration')">Duration</a> -
-			<a href="" ng-click="stream.updatePagination('user')">User</a>
-			<ul>
-				<li ng-repeat="track in stream.tracks | orderBy:stream.pagination">
-					<a href ng-click="stream.play(track.stream_url)">{{track.title}} - {{track.user}}</a>
-				<li>
+			<a href="" ng-click="stream.updatePagination('user')">User</a> -
+			<a href="" ng-click="stream.updatePagination('date')">Date</a>
+			<ul class="list-group">
+				<li ng-repeat="track in stream.tracks | orderBy:stream.pagination"  class="list-group-item">
+					{{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span class="badge" ng-click="stream.play(track.stream_url)"> > </span>
+				</li>
 			</ul>
 			{% endraw %}
 		</div>
