@@ -21,8 +21,11 @@
 		<p><a href="/radio6">Listen to Radio 6</a></p>
 		<div class="stream" ng-controller="StreamController as stream">
 			{% raw %}
+			Order by: <a href="" ng-click="stream.updatePagination('title')">Name</a> -
+			<a href="" ng-click="stream.updatePagination('duration')">Duration</a> -
+			<a href="" ng-click="stream.updatePagination('user')">User</a>
 			<ul>
-				<li ng-repeat="track in stream.tracks">
+				<li ng-repeat="track in stream.tracks | orderBy:stream.pagination">
 					<a href ng-click="stream.play(track.stream_url)">{{track.title}} - {{track.user}}</a>
 				<li>
 			</ul>
