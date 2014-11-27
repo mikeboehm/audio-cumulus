@@ -11,6 +11,25 @@ from connection import ScDetails
 details = ScDetails();
 client = soundcloud.Client(client_id=details.client_id, client_secret=details.client_secret, username=details.username, password=details.password)
 
+
+class VlcPlayer:
+	def __init__(self):
+		self.instance = vlc.Instance()
+		self.player = self.instance.media_player_new()
+	def play(self, stream_url):
+		self.media = self.instance.media_new(stream_url)
+		self.player.set_media(self.media)
+		self.player.play()
+		return self.player
+
+	def stop(self):
+		self.player.stop()
+
+	def pause(self):
+		self.player.pause()
+
+player = VlcPlayer()
+
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -45,8 +64,8 @@ def play_stream():
 	if request.method == 'POST':
 		url = request.json['url']
 		stream_url = client.get(url, allow_redirects=False)
-		player = vlc.MediaPlayer(stream_url.location)
-		player.play();
+		print dir(stream_url.keys())
+		player.play(stream_url.location)
 	return jsonify({'are you ready to rock?' : 'fuck yeah!'})
 
 @app.route("/get_tracks")
@@ -151,15 +170,13 @@ def radio6():
 	xml = requests.get('http://bbc.co.uk/radio/listen/live/r6.asx')
 	tree = ET.fromstring(xml.content)
 	stream = tree.find('Entry').find('ref').attrib['href']
-	player = vlc.MediaPlayer(stream)
-	player.play();
+	player.play(stream);
 	return redirect(url_for('hello'))
 
 @app.route('/stop')
 def stop():
-	# player = g.get('player')
-	# player.stop()
-	return redirect(url_for('hello'))
+	player.stop()
+	return jsonify({'response' : 'ssssshhh!'})
 
 if __name__ == "__main__":
 	app.debug = True

@@ -17,6 +17,11 @@
 				<li role="presentation"{% if favourites %} class="active"{% endif %}><a href="/favourites">Favourites</a></li>
 				<li role="presentation"{% if otherfavourites %} class="active"{% endif %}><a href="/others_favourites">Other's Favourites</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right" ng-controller="StopController as stop">
+				<li>
+					<button type="button" ng-click="stop.stopPlaying()" class="btn btn-default navbar-btn">Stop</button>
+				</li>
+			</ul>
 		</div>
 	</nav>
 	<div class="container">

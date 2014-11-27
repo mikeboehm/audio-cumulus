@@ -32,7 +32,7 @@
         }
         this.embed = function(stream_url){
             $http.post('/embedcode', { url : stream_url}).success(function(data){
-                stream.embed_code = $sce.trustAsHtml(data)
+                stream.embed_code = $sce.trustAsHtml('<div class="well well-lg">' + data + '</div>');
             });
         }
     } ] );
@@ -56,7 +56,7 @@
         }
         this.embed = function(stream_url){
             $http.post('/embedcode', { url : stream_url}).success(function(data){
-                stream.embed_code = $sce.trustAsHtml(data)
+                stream.embed_code = $sce.trustAsHtml('<div class="well well-lg">' + data + '</div>');
             });
         }
     } ] );
@@ -80,9 +80,15 @@
         }
         this.embed = function(stream_url){
             $http.post('/embedcode', { url : stream_url}).success(function(data){
-                stream.embed_code = $sce.trustAsHtml(data)
+                stream.embed_code = $sce.trustAsHtml('<div class="well well-lg">' + data + '</div>');
             });
         }
     } ] );
+
+    app.controller('StopController', [ '$http', function( $http ){  
+        this.stopPlaying = function(){
+            $http.get('/stop')
+        }
+    } ] )
 
 })();

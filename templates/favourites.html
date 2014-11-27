@@ -5,7 +5,7 @@
     </div>
     <div class="stream" ng-controller="FavouritesController as stream">
         {% raw %}
-        <div class="well well-lg" ng-bind-html="stream.embed_code"></div>
+        <div ng-bind-html="stream.embed_code"></div>
         <p>
             Order by: <a href="" ng-click="stream.updatePagination('title')">Name</a> -
             <a href="" ng-click="stream.updatePagination('-duration')">Duration</a> -
@@ -14,7 +14,7 @@
         </p>
         <ul class="list-group">
             <li ng-repeat="track in stream.tracks | orderBy:stream.pagination"  class="list-group-item">
-                {{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span class="pull-right btn btn-danger" ng-click="stream.play(track.stream_url)"> vlc </span> <span class="pull-right btn btn-info" ng-click="stream.embed(track.permalink)"> embed </span>
+                <p>{{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span class="pull-right btn btn-danger" ng-click="stream.play(track.stream_url)"> vlc </span> <span class="pull-right btn btn-info" ng-click="stream.embed(track.permalink)"> embed </span></p>
             </li>
         </ul>
         {% endraw %}
