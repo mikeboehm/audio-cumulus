@@ -119,8 +119,8 @@ def get_others_favourites():
 		users = [dict(id=follow.id, username=follow.username) for follow in followers]
 		tracks = []
 		for user in users:
-			user_tracks = [client.get('/users/' + str(user['id']) + '/favorites') for user in users]
-			for track in user_tracks:
+			user_tracks = client.get('/users/' + str(user['id']) + '/favorites')
+		 	for track in user_tracks:
 				if hasattr(track, 'stream_url'):
 					tracks.append(dict(
 						id=track.id,
@@ -130,11 +130,12 @@ def get_others_favourites():
 						user=track.user['username'],
 						date=track.created_at,
 						permalink=track.permalink_url,
-						favourited=user.username
+						favourited=user['username']
 					))
 		with open('data/others_favourites.txt', 'w') as outfile:
 			json.dump({'tracks' : tracks}, outfile)
 		return jsonify({ 'tracks' : tracks })
+		return 'test'
 
 @app.route('/embedcode', methods=['GET', 'POST'])
 def embedcode():

@@ -9,13 +9,17 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" title="Styles" type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li role="presentation"{% if home %} class="active"{% endif %}><a href="/">Home</a></li>
+				<li role="presentation"{% if stream %} class="active"{% endif %}><a href="/stream">Stream</a></li>
+				<li role="presentation"{% if favourites %} class="active"{% endif %}><a href="/favourites">Favourites</a></li>
+				<li role="presentation"{% if otherfavourites %} class="active"{% endif %}><a href="/others_favourites">Other's Favourites</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
-		<ul class="nav nav-tabs">
-			<li role="presentation"{% if home %} class="active"{% endif %}><a href="/">Home</a></li>
-			<li role="presentation"{% if stream %} class="active"{% endif %}><a href="/stream">Stream</a></li>
-			<li role="presentation"{% if favourites %} class="active"{% endif %}><a href="/favourites">Favourites</a></li>
-			<li role="presentation"{% if otherfavourites %} class="active"{% endif %}><a href="/others_favourites">Other's Favourites</a></li>
-		</ul>
 		{% block content %}
 		{% endblock %}
 
