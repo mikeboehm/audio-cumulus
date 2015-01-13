@@ -77,9 +77,9 @@ def get_tracks():
 
 	# otherwise regenerate the file
 	else:
-		followers = client.get('/me/followings')
+		followers = client.get('/me/followings', limit=200)
 		users = [follow.id for follow in followers]
-		user_tracks = [client.get('/tracks/', user_id=user, limit=30, embeddable_by='me') for user in users]
+		user_tracks = [client.get('/tracks/', user_id=user, embeddable_by='me') for user in users]
 		tracks = []
 		for user in user_tracks:
 			for track in user:
@@ -91,7 +91,8 @@ def get_tracks():
 						stream_url=track.stream_url,
 						user=track.user['username'],
 						date=track.created_at,
-						permalink=track.permalink_url
+						permalink=track.permalink_url,
+						image=track.artwork_url
 					))
 		with open('data/list.txt', 'w') as outfile:
 			json.dump({'tracks' : tracks}, outfile)
@@ -107,7 +108,7 @@ def get_favourites():
 	# otherwise regenerate the file
 	else:
 		me = client.get('/me/')
-		fav_tracks = client.get('/users/' + str(me.id) + '/favorites')
+		fav_tracks = client.get('/users/' + str(me.id) + '/favorites', limit=200)
 		tracks = []
 		for track in fav_tracks:
 			if hasattr(track, 'stream_url'):
@@ -118,7 +119,8 @@ def get_favourites():
 					stream_url=track.stream_url,
 					user=track.user['username'],
 					date=track.created_at,
-					permalink=track.permalink_url
+					permalink=track.permalink_url,
+					image=track.artwork_url
 				))
 		with open('data/favourites.txt', 'w') as outfile:
 			json.dump({'tracks' : tracks}, outfile)
@@ -134,7 +136,7 @@ def get_others_favourites():
 
 	# otherwise regenerate the file
 	else:
-		followers = client.get('/me/followings')
+		followers = client.get('/me/followings', limit=200)
 		users = [dict(id=follow.id, username=follow.username) for follow in followers]
 		tracks = []
 		for user in users:
@@ -149,7 +151,8 @@ def get_others_favourites():
 						user=track.user['username'],
 						date=track.created_at,
 						permalink=track.permalink_url,
-						favourited=user['username']
+						favourited=user['username'],
+						image=track.artwork_url
 					))
 		with open('data/others_favourites.txt', 'w') as outfile:
 			json.dump({'tracks' : tracks}, outfile)
@@ -180,4 +183,4 @@ def stop():
 
 if __name__ == "__main__":
 	app.debug = True
-	app.run()
+	app.run(host='0.0.0.0')
