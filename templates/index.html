@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-	<div class="page-header">
-		<h1>Play some phat beats</h1>
-	</div>
-	<form action="/play" role="form" method="post">
-		<div class="form-group">
-			<label for="url">Url:</label>
-			<input class="form-control" type="text" name="url" />
-		</div>
-		<button type="submit">Submit</button>
-	</form>
-	<a href="/radio6" class="btn btn-default">Listen to Radio 6</a>
+<div class="page-header">
+    <h1>Play some phat beats</h1>
+</div>
+<form action="/play" role="form" method="post">
+    <div class="form-group">
+        <label for="url">Url:</label>
+        <input class="form-control" type="text" name="url"/>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+<a href="/radio6" class="btn btn-default">Listen to Radio 6</a>
 {% endblock %}

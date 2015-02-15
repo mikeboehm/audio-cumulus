@@ -1,25 +1,29 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="page-header">
-        <h1>Other's Favourites</h1>
-    </div>
-    <div class="stream" ng-controller="OthersController as stream">
-        {% raw %}
-        <div ng-bind-html="stream.embed_code"></div>
-        <p>
-            Order by: <a href="" ng-click="stream.updatePagination('title')">Name</a> -
-            <a href="" ng-click="stream.updatePagination('-duration')">Duration</a> -
-            <a href="" ng-click="stream.updatePagination('user')">User</a> -
-            <a href="" ng-click="stream.updatePagination('-date')">Date</a> -
-            <a href="" ng-click="stream.updatePagination('favourited')">Favourited by</a>
-        </p>
-        <ul class="list-group">
-            <li ng-repeat="track in stream.tracks | orderBy:stream.pagination"  class="list-group-item">
-            	<img src="{{track.image}}" />
-                <p>{{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span class="pull-right btn btn-danger" ng-click="stream.play(track.stream_url)"> vlc </span> <span class="pull-right btn btn-info" ng-click="stream.embed(track.permalink)"> embed </span></p>
-                <p>{{track.favourited}}</p>
-            </li>
-        </ul>
-        {% endraw %}
-    </div>
+<div class="page-header">
+    <h1>Other's Favourites</h1>
+</div>
+<div class="stream" ng-controller="OthersController as stream">
+    {% raw %}
+    <div ng-bind-html="stream.embed_code"></div>
+    <p>
+        Order by: <a href="" ng-click="stream.updatePagination('title')">Name</a> -
+        <a href="" ng-click="stream.updatePagination('-duration')">Duration</a> -
+        <a href="" ng-click="stream.updatePagination('user')">User</a> -
+        <a href="" ng-click="stream.updatePagination('-date')">Date</a> -
+        <a href="" ng-click="stream.updatePagination('favourited')">Favourited by</a>
+    </p>
+    <ul class="list-group">
+        <li ng-repeat="track in stream.tracks | orderBy:stream.pagination" class="list-group-item">
+            <img src="{{track.image}}"/>
+
+            <p>{{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span
+                    class="pull-right btn btn-danger" ng-click="stream.play(track.stream_url)"> vlc </span> <span
+                    class="pull-right btn btn-info" ng-click="stream.embed(track.permalink)"> embed </span></p>
+
+            <p>{{track.favourited}}</p>
+        </li>
+    </ul>
+    {% endraw %}
+</div>
 {% endblock %}

@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="scloud">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>SoundFlask</title>
-	<link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" title="Styles" type="text/css" media="screen" charset="utf-8">
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" title="Styles" type="text/css" media="screen" charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SoundFlask</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}" title="Styles" type="text/css"
+          media="screen" charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" title="Styles" type="text/css"
+          media="screen" charset="utf-8">
 </head>
 <body>
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container">
-			<ul class="nav navbar-nav">
-				<li role="presentation"{% if home %} class="active"{% endif %}><a href="/">Home</a></li>
-				<li role="presentation"{% if stream %} class="active"{% endif %}><a href="/stream">Stream</a></li>
-				<li role="presentation"{% if favourites %} class="active"{% endif %}><a href="/favourites">Favourites</a></li>
-				<li role="presentation"{% if otherfavourites %} class="active"{% endif %}><a href="/others_favourites">Other's Favourites</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right" ng-controller="StopController as stop">
-				<li>
-					<button type="button" ng-click="stop.stopPlaying()" class="btn btn-default navbar-btn">Stop</button>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	<div class="container">
-		{% block content %}
-		{% endblock %}
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li role="presentation"
+            {% if home %} class="active"{% endif %}><a href="/">Home</a></li>
+            <li role="presentation"
+            {% if stream %} class="active"{% endif %}><a href="/stream">Stream</a></li>
+            <li role="presentation"
+            {% if favourites %} class="active"{% endif %}><a href="/favourites">Favourites</a></li>
+            <li role="presentation"
+            {% if otherfavourites %} class="active"{% endif %}><a href="/others_favourites">Other's Favourites</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-controller="StopController as stop">
+            <li>
+                <button type="button" ng-click="stop.stopPlaying()" class="btn btn-default navbar-btn">Stop</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {% block content %}
+    {% endblock %}
 
-	</div>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
-	<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
