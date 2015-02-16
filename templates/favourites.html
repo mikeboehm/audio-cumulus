@@ -14,11 +14,23 @@
     </p>
     <ul class="list-group">
         <li ng-repeat="track in stream.tracks | orderBy:stream.pagination" class="list-group-item">
-            <img src="{{track.image}}"/>
-
-            <p>{{track.title}} ({{track.duration | duration}}) - <strong>{{track.user}}</strong> <span
-                    class="pull-right btn btn-danger" ng-click="stream.play(track.stream_url)"> vlc </span> <span
-                    class="pull-right btn btn-info" ng-click="stream.embed(track.permalink)"> embed </span></p>
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" src="{{track.image}}" alt="Track thumbnail">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading">{{track.user}}</h5>
+                    <h4 class="media-heading">{{track.title}}</h4>
+                    <!--<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>-->
+                    <p>{{track.duration | duration}}</p>
+                </div>
+                <div class="media-right">
+                    <span class="pull-right btn btn-danger" ng-click="stream.play(track.stream_url)"> vlc </span>
+                    <span class="pull-right btn btn-info" ng-click="stream.embed(track.permalink)"> embed </span>
+                </div>
+            </div>
         </li>
     </ul>
     {% endraw %}
